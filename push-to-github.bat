@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 REM ===== 一键提交代码到GitHub并触发Docker自动构建 =====
 echo.
 echo ===== QSGL WeChat API GitHub 自动化部署 =====
@@ -25,6 +26,18 @@ echo - 用户名: %GITHUB_USERNAME%
 echo - 仓库名: %GITHUB_REPO%
 echo - 仓库URL: https://github.com/%GITHUB_USERNAME%/%GITHUB_REPO%
 echo.
+
+echo ============================================
+echo 重要提示：GitHub仓库创建步骤
+echo ============================================
+echo 1. 打开浏览器访问: https://github.com/new
+echo 2. 仓库名称填写: %GITHUB_REPO%
+echo 3. 设置为Public（公开）
+echo 4. 不要勾选任何初始化选项（README, .gitignore, LICENSE）
+echo 5. 点击"Create repository"按钮
+echo 6. 创建完成后按任意键继续...
+echo ============================================
+pause
 
 REM 检查是否已经是Git仓库
 if not exist ".git\" (
@@ -57,23 +70,24 @@ git commit -m "%commit_message%"
 REM 推送到GitHub
 echo [6/7] 推送到GitHub...
 echo.
-echo 正在推送代码到GitHub，请输入GitHub密码: qsswgl_5988856
-echo 注意: 如果启用了2FA，请使用Personal Access Token
+echo 正在推送代码到GitHub...
+echo 如果提示输入密码，请使用: qsswgl_5988856
+echo 注意: 如果启用了2FA，需要使用Personal Access Token
 echo.
 git push -u origin main
 
 if %ERRORLEVEL% NEQ 0 (
     echo.
-    echo [错误] 推送失败！可能的原因：
-    echo 1. 仓库不存在，请先在GitHub创建仓库
-    echo 2. 认证失败，请检查用户名密码
-    echo 3. 网络问题
+    echo [错误] 推送失败！
     echo.
-    echo 解决方案：
-    echo 1. 访问 https://github.com/new 创建新仓库
-    echo 2. 仓库名称设为: %GITHUB_REPO%
+    echo 可能原因和解决方案：
+    echo 1. 仓库不存在 - 请先访问 https://github.com/new 创建仓库
+    echo 2. 仓库名称: %GITHUB_REPO%
     echo 3. 不要初始化README、.gitignore或LICENSE
-    echo 4. 重新运行此脚本
+    echo 4. 认证问题 - 检查用户名密码是否正确
+    echo 5. 网络问题 - 检查网络连接
+    echo.
+    echo 创建仓库后重新运行此脚本
     echo.
     pause
     exit /b 1
