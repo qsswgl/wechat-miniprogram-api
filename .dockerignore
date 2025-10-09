@@ -1,0 +1,68 @@
+# .NET 构建输出
+bin/
+obj/
+out/
+
+# Visual Studio 文件
+.vs/
+.vscode/
+
+# 用户特定文件
+*.user
+*.suo
+
+# 临时文件
+*.tmp
+*.temp
+
+# 日志文件
+*.log
+
+# OS 生成的文件
+.DS_Store
+Thumbs.db
+
+# 发布输出
+publish/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*
+
+# 脚本
+*.ps1
+*.sh
+
+# 文档和诊断文件
+*.md
+README*
+*_GUIDE.md
+*_SOLUTION.md
+*_README.md
+
+# 临时打包目录（避免重复文件）
+docker-deploy/
+pack-for-docker.bat
+qsgl-api-docker.zip
+
+# 测试和诊断脚本
+*-test.ps1
+*-diagnosis.ps1
+external-ip-test.ps1
+generate-cert.ps1
+http3-test.ps1
+json-diagnosis.ps1
+simple-test.ps1
+test-protocols.ps1
+
+# Windows 服务相关文件
+install-service.ps1
+uninstall-service.ps1
+publish.ps1
+deploy-to-ubuntu.bat
+one-click-deploy.bat
+test-deployment.bat

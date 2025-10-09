@@ -1,0 +1,61 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  DOCKER_USERNAME: qsswgl
+  IMAGE_NAME: wechat-api
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ env.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+          
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        platforms: linux/amd64,linux/arm64
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Update deployment status
+      if: success()
+      run: |
+        echo "✅ Docker镜像构建并推送成功！"
+        echo "🐳 镜像地址: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest"
+        echo "📝 可以使用以下命令部署:"
+        echo "docker pull ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest"
+        echo "docker run -d -p 8080:8080 --name wechat-api ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest"

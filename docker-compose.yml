@@ -1,0 +1,25 @@
+services:
+  wechat-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: qsgl-wechat-api
+    ports:
+      - "8080:8080"    # HTTP
+      - "8081:8081"    # HTTPS
+      - "8082:8082"    # HTTP/3
+      - "8083:8083"    # HTTPS兼容
+    volumes:
+      - ./certificates:/app/certificates:ro  # 证书目录（只读）
+      - ./wwwroot/uploadall:/app/wwwroot/uploadall  # 上传文件目录
+      - ./appsettings.json:/app/appsettings.json:ro  # 配置文件（只读）
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080;https://+:8081;https://+:8082;https://+:8083
+    restart: unless-stopped
+    networks:
+      - qsgl-network
+
+networks:
+  qsgl-network:
+    driver: bridge
