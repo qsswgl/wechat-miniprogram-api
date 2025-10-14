@@ -26,20 +26,35 @@ namespace WeChatMiniProgramAPI.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// 生成微信小程序二维码
+        /// </summary>
+        /// <param name="dbName">数据库名称</param>
+        /// <param name="goodsId">商品ID</param>
+        /// <param name="pagePath">小程序页面路径</param>
+        /// <param name="accessToken">微信访问令牌</param>
+        /// <returns>返回生成的二维码图片或JSON结果</returns>
         [EnableCors("myCors")]
         [HttpGet]
         [Route("CreateMiniProgramCode")]
-        public async Task<ContentResult> CreateMiniProgramCode()
+        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(400, Type = typeof(string))]
+        [ProducesResponseType(500, Type = typeof(string))]
+        public async Task<ContentResult> CreateMiniProgramCode(
+            [FromQuery] string dbName,
+            [FromQuery] string goodsId, 
+            [FromQuery] string pagePath,
+            [FromQuery] string accessToken)
         {
             try
             {
                 _logger.LogInformation("开始处理微信小程序二维码生成请求");
 
                 // 1. 获取请求参数
-                string dbName = Request.Query["DBName"].ToString();
-                string goodsId = Request.Query["goodsId"].ToString();
-                string pagePath = Request.Query["pagePath"].ToString();
-                string accessToken = Request.Query["accessToken"].ToString();
+                if (string.IsNullOrEmpty(dbName)) dbName = Request.Query["DBName"].ToString();
+                if (string.IsNullOrEmpty(goodsId)) goodsId = Request.Query["goodsId"].ToString();
+                if (string.IsNullOrEmpty(pagePath)) pagePath = Request.Query["pagePath"].ToString();
+                if (string.IsNullOrEmpty(accessToken)) accessToken = Request.Query["accessToken"].ToString();
 
 
                 _logger.LogInformation("请求参数 - DBName: {DBName}, goodsId: {GoodsId}, pagePath: {PagePath}",

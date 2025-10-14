@@ -1,0 +1,2 @@
+# 一键部署修复版本（复制粘贴执行）
+docker stop wechat-api; docker rm wechat-api; docker pull 43.138.35.183:5000/wechat-api-net8:alpine-musl-ssl-swagger-port-fixed; docker run -d --name wechat-api --restart unless-stopped -p 8090:8090 -p 8091:8091 -p 8092:8092 -e DOTNET_RUNNING_IN_CONTAINER=true -e ASPNETCORE_ENVIRONMENT=Production 43.138.35.183:5000/wechat-api-net8:alpine-musl-ssl-swagger-port-fixed && echo "部署完成！" && docker ps --filter "name=wechat-api"

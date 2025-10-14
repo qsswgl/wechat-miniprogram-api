@@ -1,0 +1,7 @@
+Host qsgl-server
+    HostName 43.138.35.183
+    User root
+    IdentityFile K:\QSGLAPI\WeChatMiniProgramAPI\ssh_private_key
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    PasswordAuthentication no

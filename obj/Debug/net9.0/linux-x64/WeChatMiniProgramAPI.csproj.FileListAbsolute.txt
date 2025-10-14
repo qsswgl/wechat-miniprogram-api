@@ -1,0 +1,9 @@
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.csproj.AssemblyReference.cache
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\rpswa.dswa.cache.json
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.GeneratedMSBuildEditorConfig.editorconfig
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.AssemblyInfoInputs.cache
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.AssemblyInfo.cs
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.csproj.CoreCompileInputs.cache
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.MvcApplicationPartsAssemblyInfo.cs
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.MvcApplicationPartsAssemblyInfo.cache
+K:\QSGLAPI\wechatminiprogramapi\obj\Debug\net9.0\linux-x64\WeChatMiniProgramAPI.sourcelink.json

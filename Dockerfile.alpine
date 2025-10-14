@@ -1,0 +1,56 @@
+# 使用.NET 8 SDK作为构建镜像
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# 复制项目文件
+COPY *.csproj .
+RUN dotnet restore
+
+# 复制所有源代码
+COPY . .
+
+# 构建和发布应用 - 独立部署模式
+RUN dotnet publish -c Release -r linux-x64 --self-contained true \
+    -p:PublishTrimmed=true \
+    -p:PublishSingleFile=true \
+    -p:IncludeNativeLibrariesForSelfExtract=true \
+    -o /app/publish \
+    --no-restore
+
+# 使用Alpine Linux作为最终镜像（更小更安全）
+FROM alpine:latest AS final
+WORKDIR /app
+
+# 安装必要的运行时依赖
+RUN apk add --no-cache \
+    icu-libs \
+    libgcc \
+    libssl3 \
+    libstdc++ \
+    zlib
+
+# 复制发布的应用（独立部署的单文件）
+COPY --from=build /app/publish .
+
+# 创建目录
+RUN mkdir -p /app/certificates /app/wwwroot/uploadall
+
+# 设置文件权限
+RUN chmod +x WeChatMiniProgramAPI
+
+# 暴露端口
+EXPOSE 8080 8081 8082 8083
+
+# 设置环境变量
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:8080
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
+# 创建非root用户
+RUN addgroup -g 1001 appuser && \
+    adduser -u 1001 -G appuser -s /bin/sh -D appuser && \
+    chown -R appuser:appuser /app
+USER appuser
+
+# 启动应用（独立部署的可执行文件）
+ENTRYPOINT ["./WeChatMiniProgramAPI"]
