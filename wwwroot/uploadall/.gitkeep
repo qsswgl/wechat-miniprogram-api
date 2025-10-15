@@ -1,1 +1,3 @@
-# Keep this directory for uploads
+# 此文件用于保持 uploadall 目录在 Git 中被跟踪# Keep this directory for uploads
+# 确保即使目录为空也会被包含在仓库中
+# 用户上传的文件会被 .gitignore 忽略，但目录结构会被保留

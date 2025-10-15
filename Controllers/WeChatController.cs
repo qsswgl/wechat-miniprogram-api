@@ -103,8 +103,10 @@ namespace WeChatMiniProgramAPI.Controllers
                 _logger.LogInformation("二维码图片已保存: {FilePath}", filePath);
 
                 // 5. 构建图片URL
-                string host = HttpContext.Request.Host.Value ?? "localhost";
-                string scheme = HttpContext.Request.Scheme;
+                string host = HttpContext?.Request?.Host.Value ?? "tx.qsgl.net:8092";
+                string scheme = HttpContext?.Request?.Scheme ?? "https";
+                
+                // Host.Value 已经包含端口号，无需重复添加
                 string imageUrl = $"{scheme}://{host}/uploadall/{fileName}";
 
                 _logger.LogInformation("二维码生成成功，URL: {ImageUrl}", imageUrl);

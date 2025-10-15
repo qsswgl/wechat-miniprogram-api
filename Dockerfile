@@ -9,8 +9,8 @@ RUN dotnet restore
 # 复制所有源代码
 COPY . .
 
-# 构建和发布应用
-RUN dotnet publish -c Release -o /app/publish --no-restore
+# 构建和发布应用 (Docker环境使用linux-x64)
+RUN dotnet publish -c Release -o /app/publish --no-restore -r linux-x64 --self-contained true
 
 # 使用.NET 9 Runtime作为最终镜像
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final

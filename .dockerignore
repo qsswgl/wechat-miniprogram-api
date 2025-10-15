@@ -66,3 +66,24 @@ publish.ps1
 deploy-to-ubuntu.bat
 one-click-deploy.bat
 test-deployment.bat
+
+# 上传文件目录 - 排除用户上传的文件但保留目录结构
+wwwroot/uploadall/*.png
+wwwroot/uploadall/*.jpg
+wwwroot/uploadall/*.jpeg
+wwwroot/uploadall/*.gif
+wwwroot/uploadall/*.webp
+wwwroot/uploadall/*.bmp
+wwwroot/uploadall/*.tiff
+wwwroot/uploadall/*.svg
+wwwroot/uploadall/*.pdf
+wwwroot/uploadall/*.doc
+wwwroot/uploadall/*.docx
+wwwroot/uploadall/*.xls
+wwwroot/uploadall/*.xlsx
+wwwroot/uploadall/*.zip
+wwwroot/uploadall/*.rar
+wwwroot/uploadall/*.7z
+
+# 保留.gitkeep文件以维持目录结构
+!wwwroot/uploadall/.gitkeep

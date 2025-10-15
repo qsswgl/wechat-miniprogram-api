@@ -158,8 +158,5 @@
             域名，如：qsgl.net
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)">
-            <summary>Extracts the value with the specified key and converts it to the specified type.</summary>
-        </member>
     </members>
 </doc>

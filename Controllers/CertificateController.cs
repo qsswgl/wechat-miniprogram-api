@@ -220,8 +220,8 @@ namespace WeChatMiniProgramAPI.Controllers
         /// 1) JSON对象：{ "domain": "qsgl.net", "isWildcard": true }
         /// 2) JSON字符串："qsgl.net"
         /// 3) 纯文本：qsgl.net（Content-Type: text/plain）
-        /// 4) 表单：domain=qsgl.net&isWildcard=true（Content-Type: application/x-www-form-urlencoded）
-        /// 5) Query：/api/Certificate/request-flex?domain=qsgl.net&isWildcard=true
+        /// 4) 表单：domain=qsgl.net&amp;isWildcard=true（Content-Type: application/x-www-form-urlencoded）
+        /// 5) Query：/api/Certificate/request-flex?domain=qsgl.net&amp;isWildcard=true
         /// </summary>
     [EnableCors("myCors")]
     [HttpPost]

@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeChatMiniProgramAPI</name>
+    </assembly>
+    <members>
+        <member name="T:WeChatMiniProgramAPI.Controllers.CertificateRequestModel">
+            <summary>
+            证书申请请求模型
+            </summary>
+        </member>
+        <member name="P:WeChatMiniProgramAPI.Controllers.CertificateRequestModel.Domain">
+            <summary>
+            域名，如：qsgl.net
+            </summary>
+            <example>qsgl.net</example>
+        </member>
+        <member name="P:WeChatMiniProgramAPI.Controllers.CertificateRequestModel.IsWildcard">
+            <summary>
+            是否申请泛域名证书，默认true
+            </summary>
+            <example>true</example>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.TestJsonDeserialization(WeChatMiniProgramAPI.Controllers.CertificateRequestModel)">
+            <summary>
+            测试JSON反序列化 - 诊断用
+            </summary>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.TestRawJson(System.Object)">
+            <summary>
+            测试原始JSON反序列化
+            </summary>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.RequestCertificate(WeChatMiniProgramAPI.Controllers.CertificateRequestModel)">
+            <summary>
+            申请SSL证书（支持泛域名）- 支持JSON请求体
+            </summary>
+            <param name="request">证书申请请求</param>
+            <returns></returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.RequestCertificateQuery(System.String,System.Boolean)">
+            <summary>
+            申请SSL证书（支持泛域名）- 支持Query参数方式
+            </summary>
+            <param name="domain">域名，如：qsgl.net</param>
+            <param name="isWildcard">是否申请泛域名证书，默认true</param>
+            <returns></returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.RequestCertificateFlexible(System.Text.Json.JsonElement,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            申请SSL证书（弹性POST请求）
+            支持以下格式：
+            1) JSON对象：{ "domain": "qsgl.net", "isWildcard": true }
+            2) JSON字符串："qsgl.net"
+            3) 纯文本：qsgl.net（Content-Type: text/plain）
+            4) 表单：domain=qsgl.net&amp;isWildcard=true（Content-Type: application/x-www-form-urlencoded）
+            5) Query：/api/Certificate/request-flex?domain=qsgl.net&amp;isWildcard=true
+            </summary>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.RenewCertificate(System.String)">
+            <summary>
+            续订SSL证书
+            </summary>
+            <param name="domain">域名</param>
+            <returns></returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.GetCertificateInfo(System.String)">
+            <summary>
+            获取证书信息
+            </summary>
+            <param name="domain">域名</param>
+            <returns></returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.GetAllCertificates">
+            <summary>
+            获取所有证书列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.CertificateController.AutoRenewCertificates">
+            <summary>
+            批量续订即将过期的证书
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.HealthController.Get">
+            <summary>
+            健康检查端点
+            </summary>
+            <returns>服务状态信息</returns>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.HealthController.GetInfo">
+            <summary>
+            获取服务信息
+            </summary>
+            <returns>详细的服务信息</returns>
+        </member>
+        <member name="T:WeChatMiniProgramAPI.Controllers.TestController">
+            <summary>
+            测试控制器 - 用于验证API基本功能
+            </summary>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.TestController.GetHealth">
+            <summary>
+            健康检查端点
+            </summary>
+            <returns>API状态信息</returns>
+            <response code="200">API运行正常</response>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.TestController.GetInfo">
+            <summary>
+            获取服务器信息
+            </summary>
+            <returns>服务器基本信息</returns>
+            <response code="200">成功返回服务器信息</response>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.TestController.Echo(System.String)">
+            <summary>
+            Echo测试 - 返回发送的消息
+            </summary>
+            <param name="message">要回显的消息</param>
+            <returns>回显的消息</returns>
+            <response code="200">成功回显消息</response>
+            <response code="400">消息为空或无效</response>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.TestController.GetRandom(System.Int32,System.Int32)">
+            <summary>
+            获取随机数
+            </summary>
+            <param name="min">最小值 (默认: 1)</param>
+            <param name="max">最大值 (默认: 100)</param>
+            <returns>指定范围内的随机数</returns>
+            <response code="200">成功返回随机数</response>
+            <response code="400">参数范围无效</response>
+        </member>
+        <member name="M:WeChatMiniProgramAPI.Controllers.WeChatController.CreateMiniProgramCode(System.String,System.String,System.String,System.String)">
+            <summary>
+            生成微信小程序二维码
+            </summary>
+            <param name="dbName">数据库名称</param>
+            <param name="goodsId">商品ID</param>
+            <param name="pagePath">小程序页面路径</param>
+            <param name="accessToken">微信访问令牌</param>
+            <returns>返回生成的二维码图片或JSON结果</returns>
+        </member>
+        <member name="T:WeChatMiniProgramAPI.Models.CertificateRequestModel">
+            <summary>
+            证书申请请求模型
+            </summary>
+        </member>
+        <member name="P:WeChatMiniProgramAPI.Models.CertificateRequestModel.Domain">
+            <summary>
+            域名，如：qsgl.net
+            </summary>
+        </member>
+        <member name="P:WeChatMiniProgramAPI.Models.CertificateRequestModel.IsWildcard">
+            <summary>
+            是否申请泛域名证书，默认true
+            </summary>
+        </member>
+        <member name="T:WeChatMiniProgramAPI.Models.CertificateRenewModel">
+            <summary>
+            证书续订请求模型
+            </summary>
+        </member>
+        <member name="P:WeChatMiniProgramAPI.Models.CertificateRenewModel.Domain">
+            <summary>
+            域名，如：qsgl.net
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -7,12 +7,12 @@
     <!-- Docker 独立部署配置 -->
     <UseAppHost>true</UseAppHost>
     <InvariantGlobalization>false</InvariantGlobalization>
-    <!-- 独立部署配置 -->
-    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
+    <!-- 独立部署配置 (RuntimeIdentifier 在发布时指定) -->
+    <!-- <RuntimeIdentifier>linux-x64</RuntimeIdentifier> -->
+    <SelfContained>false</SelfContained>
     <PublishTrimmed>false</PublishTrimmed>
-    <PublishSingleFile>true</PublishSingleFile>
-    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <!-- <PublishSingleFile>true</PublishSingleFile> -->
+    <!-- <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract> -->
     <!-- 启用JSON反射序列化 -->
     <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
     <!-- 生成XML文档以支持Swagger -->
