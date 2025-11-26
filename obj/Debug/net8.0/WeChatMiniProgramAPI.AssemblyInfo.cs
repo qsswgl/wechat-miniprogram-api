@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeChatMiniProgramAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a99f804acc87b2b78ede2b27c37a81bfc0617484")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c503b0a1d1eb3d62ecb085f2f63f57189116f8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("WeChatMiniProgramAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WeChatMiniProgramAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

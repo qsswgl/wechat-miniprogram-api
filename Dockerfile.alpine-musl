@@ -27,7 +27,8 @@ RUN apk add --no-cache \
     libgcc \
     libssl3 \
     libstdc++ \
-    zlib
+    zlib \
+    curl
 
 # 复制发布的应用（独立部署的单文件）
 COPY --from=build /app/publish .
@@ -58,6 +59,10 @@ RUN addgroup -g 1001 appuser && \
     adduser -u 1001 -G appuser -s /bin/sh -D appuser && \
     chown -R appuser:appuser /app
 USER appuser
+
+# 健康检查：每30秒探测一次，允许10秒启动宽限期
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -kfsS https://localhost:8082/api/health >/dev/null || exit 1
 
 # 启动应用（独立部署的可执行文件）
 ENTRYPOINT ["./WeChatMiniProgramAPI"]

@@ -1,0 +1,31 @@
+# Docker Compose 配置用于生产环境部署 WeChat Mini Program API
+services:
+  wechat-api:
+    image: ${IMAGE_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
+    container_name: wechat-api
+    ports:
+      - "${HTTP_PORT}:8080"   # HTTP (可用于HTTP->HTTPS重定向)
+      - "${HTTPS_PORT}:8081"  # HTTPS 主端口
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DOTNET_RUNNING_IN_CONTAINER=true
+    volumes:
+      - ${UPLOAD_VOLUME}:/app/wwwroot/uploadall
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    healthcheck:
+      test: >-
+        CMD-SHELL sh -c '(
+          (command -v curl >/dev/null 2>&1 && curl -kfsS https://localhost:8081/api/health) ||
+          (command -v wget >/dev/null 2>&1 && wget -q --no-check-certificate -O - https://localhost:8081/api/health)
+        ) >/dev/null'
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - qsgl-network
+
+networks:
+  qsgl-network:
+    driver: bridge

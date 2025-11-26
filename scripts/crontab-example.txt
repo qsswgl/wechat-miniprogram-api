@@ -1,0 +1,2 @@
+# 每5分钟检查一次 wechat-api 健康状况并自愈
+*/5 * * * * /bin/bash /opt/wechat-api/scripts/monitor-wechat-api.sh wechat-api >> /var/log/wechat-api-monitor.cron.log 2>&1
